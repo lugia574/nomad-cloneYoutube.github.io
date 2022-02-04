@@ -14,5 +14,8 @@
   "bugs": {
     "url": "https://github.com/lugia574/nomad-cloneYoutube.github.io/issues"
   },
-  "homepage": "https://github.com/lugia574/nomad-cloneYoutube.github.io#readme"
+  "homepage": "https://github.com/lugia574/nomad-cloneYoutube.github.io#readme",
+  "dependencies": {
+    "express": "^4.17.2"
+  }
 }
