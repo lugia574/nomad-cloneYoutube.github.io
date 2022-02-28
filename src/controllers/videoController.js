@@ -33,6 +33,7 @@ let videos = [
   },
 ];
 export const trending = (req, res) => {
+  console.log(videos);
   return res.render("home", { pageTitle: "Home", videos });
 };
 export const watch = (req, res) => {
@@ -62,5 +63,27 @@ export const postEdit = (req, res) => {
 };
 
 export const search = (req, res) => res.send("Search");
-export const upload = (req, res) => res.send("Upload");
+export const upload = (req, res) => {
+  return res.render("upload");
+};
+
+export const uploadPost = (req, res) => {
+  const { title } = req.body;
+  const rating = parseInt(req.body.rating);
+  const comments = parseInt(req.body.comments);
+  const { createdAt } = req.body;
+  const views = parseInt(req.body.views);
+  const id = parseInt(req.body.id);
+
+  videos.push({
+    title: title,
+    rating: rating,
+    comments: comments,
+    createdAt: createdAt,
+    views: views,
+    id: id,
+  });
+
+  return res.render("home", { pageTitle: "Home", videos });
+};
 export const deleteVideo = (req, res) => res.send("Delete Video");
