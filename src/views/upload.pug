@@ -2,12 +2,7 @@ extends base.pug
 
 
 block content
-    h4 Create Video
+    h3 Create Video
     form(method="POST")
         input(name="title" placeholder="Title",  required)
-        input(name="rating" placeholder="rating",  required)
-        input(name="comments" placeholder="comments",  required)
-        input(name="createdAt" placeholder="createdAt", required)
-        input(name="views" placeholder="views", required)
-        input(name="id" placeholder="id", required)
         input(value="Upload", type="submit")
