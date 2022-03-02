@@ -3,14 +3,12 @@ include mixins/video
 
 
 block content
-    h2 Welcom here you will see the trending videos
-
     ul 
         a(href="/videos/upload") upload Video  
 
         each video in videos 
             +video(video)
         else 
-            p Sorry nothin found. 
+            li Sorry nothin found. 
 
     
