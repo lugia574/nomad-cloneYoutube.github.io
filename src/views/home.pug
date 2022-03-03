@@ -3,12 +3,11 @@ include mixins/video
 
 
 block content
-    ul 
-        a(href="/videos/upload") upload Video  
 
-        each video in videos 
-            +video(video)
-        else 
-            li Sorry nothin found. 
+
+    each video in videos 
+        +video(video)
+    else 
+        li Sorry nothin found. 
 
     
