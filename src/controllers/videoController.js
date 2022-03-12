@@ -3,7 +3,7 @@ import Video, { formatHashtags } from "../models/Video";
 export const home = async (req, res) => {
   try {
     const videos = await Video.find({}).sort({ createdAt: "desc" });
-    console.log(videos);
+
     return res.render("home", { pageTitle: "Home", videos });
   } catch {
     return res.render("server-error");
