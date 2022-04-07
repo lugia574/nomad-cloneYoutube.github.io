@@ -176,19 +176,20 @@ export const postEdit = async (req, res) => {
       });
     }
   }
-
-  const updatedUser = await User.findByIdAndUpdate(
-    _id,
-    {
-      name,
-      email,
-      username,
-      location,
-    },
-    { new: true }
-  );
-
-  req.session.user = updatedUser;
-  return res.redirect("/users/edit");
 };
+
+export const getChangePassword = (req, res) => {
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", {
+    pageTitle: "change-password",
+    user: req.session.user,
+  });
+};
+
+export const postChangePassword = async (req, res) => {
+  return res.redirect("/");
+};
+
 export const see = (req, res) => res.send("See");
