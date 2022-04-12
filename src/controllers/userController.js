@@ -158,7 +158,6 @@ export const postEdit = async (req, res) => {
       user: { _id, avatarUrl, email: sessionEmail, username: sessionUsername },
     },
     body: { name, email, username, location },
-    file,
   } = req;
   let searchParam = [];
   if (sessionEmail !== email) {
@@ -189,7 +188,31 @@ export const getChangePassword = (req, res) => {
 };
 
 export const postChangePassword = async (req, res) => {
-  return res.redirect("/");
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+
+  if (!ok) {
+    return res.render("users/change-password", {
+      pageTitle: "change-password",
+      errorMessage: "The current password is incorrect",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    return res.render("users/change-password", {
+      pageTitle: "change-password",
+      errorMessage: "The password does not match the confirmation",
+    });
+  }
+  user.password = newPassword;
+  await user.save();
+  req.session.destroy();
+  return res.redirect("/login");
 };
 
 export const see = (req, res) => res.send("See");
