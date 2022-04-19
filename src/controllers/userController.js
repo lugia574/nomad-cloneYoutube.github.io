@@ -158,7 +158,9 @@ export const postEdit = async (req, res) => {
       user: { _id, avatarUrl, email: sessionEmail, username: sessionUsername },
     },
     body: { name, email, username, location },
+    file,
   } = req;
+  console.log(file);
   let searchParam = [];
   if (sessionEmail !== email) {
     searchParam.push({ email });
@@ -174,7 +176,21 @@ export const postEdit = async (req, res) => {
         errorMessage: "This username/email is already taken!!.",
       });
     }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        name,
+        email,
+        username,
+        location,
+      },
+      { new: true }
+    );
+    req.session.user = updatedUser;
   }
+
+  return res.redirect("/users/edit");
 };
 
 export const getChangePassword = (req, res) => {
