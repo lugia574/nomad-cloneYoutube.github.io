@@ -160,7 +160,7 @@ export const postEdit = async (req, res) => {
     body: { name, email, username, location },
     file,
   } = req;
-  console.log(file);
+
   let searchParam = [];
   if (sessionEmail !== email) {
     searchParam.push({ email });
@@ -168,6 +168,7 @@ export const postEdit = async (req, res) => {
   if (sessionUsername !== username) {
     searchParam.push({ username });
   }
+
   if (searchParam.length > 0) {
     const foundUser = await User.findOne({ $or: searchParam });
     if (foundUser && foundUser._id.toString() !== _id) {
@@ -180,6 +181,7 @@ export const postEdit = async (req, res) => {
     const updatedUser = await User.findByIdAndUpdate(
       _id,
       {
+        avatarUrl: file ? file.path : avatarUrl,
         name,
         email,
         username,
