@@ -3,6 +3,7 @@ extends base.pug
 
 block content
     h3 #{video.views} #{video.views === 1 ? "view" : "views"}
+    video(src="/"+video.fileUrl controls width="500" height=auto) 
     div
         p=video.description
         small=video.createdAt
