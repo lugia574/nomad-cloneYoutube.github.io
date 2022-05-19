@@ -4,29 +4,11 @@ include mixins/video
 
 block content
 
-    div.vidoe__grid
+    div.video-grid
         each video in videos 
             +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
-            +video(video)
+
         else 
-            li Sorry nothin found. 
+            span.empty__message No videos found
 
         
