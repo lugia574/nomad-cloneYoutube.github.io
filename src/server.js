@@ -29,9 +29,22 @@ app.use(
 
 app.use(flash());
 app.use(localsMiddleware);
-app.use("/", rootRouter);
+
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
+
+export const getUpload = (req, res) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  return res.render("upload", { pageTitle: "Uplaod Video" });
+};
+
 app.use("/uploads", express.static("uploads"));
 app.use("/static", express.static("assets"));
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 app.use("/api", apiRouter);
