@@ -41,7 +41,7 @@ const handleKeydown = (event) => {
   if (event.code === "Space" && event.target.id !== "textarea") {
     event.preventDefault(); //화면 내려감 방지
     handlePlayClick();
-  } else if (event.code === "KeyF") {
+  } else if (event.code === "KeyF" && event.target.id !== "textarea") {
     handleFullscreen();
   }
 };
