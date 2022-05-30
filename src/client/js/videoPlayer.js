@@ -18,15 +18,22 @@ let volumeValue = 0.5;
 video.volume = volumeValue;
 
 const handlePlayClick = () => {
-  // if the video is playing, pause it
   if (video.paused) {
     video.play();
-  }
-  // else play the video
-  else {
+  } else {
     video.pause();
   }
   playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+};
+
+const handleKeydown = (event) => {
+  const { key } = event;
+  if (key === " ") {
+    event.preventDefault(); //화면 내려감 방지
+    handlePlayClick();
+  } else if (key === "f") {
+    handleFullScreen();
+  }
 };
 const handlePause = (e) => (playBtn.innerText = "Play");
 const handlePlay = (e) => (playBtn.innerText = "Pause");
@@ -115,13 +122,8 @@ const handleEnded = () => {
 };
 
 playBtn.addEventListener("click", handlePlayClick);
-videoContainer.addEventListener("click", handlePlayClick);
-window.addEventListener("keyup", (event) => {
-  if (event.code === "Space") {
-    handlePlayClick();
-  }
-});
-videoContainer.addEventListener("", handlePlayClick);
+video.addEventListener("click", handlePlayClick);
+window.addEventListener("keydown", handleKeydown);
 muteBtn.addEventListener("click", handleMute);
 volumeRange.addEventListener("input", handleVolumeChange);
 video.addEventListener("loadeddata", handleLoadedMetadata);
