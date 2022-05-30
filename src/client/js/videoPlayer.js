@@ -26,13 +26,23 @@ const handlePlayClick = () => {
   playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
 };
 
+const handleFullscreen = () => {
+  const fullscreen = document.fullscreenElement;
+  if (fullscreen) {
+    document.exitFullscreen();
+    fullScreenIcon.classList = "fas fa-expand";
+  } else {
+    videoContainer.requestFullscreen();
+    fullScreenIcon.classList = "fas fa-compress";
+  }
+};
+
 const handleKeydown = (event) => {
-  const { key } = event;
-  if (key === " ") {
+  if (event.code === "Space" && event.target.id !== "textarea") {
     event.preventDefault(); //화면 내려감 방지
     handlePlayClick();
-  } else if (key === "f") {
-    handleFullScreen();
+  } else if (event.code === "KeyF") {
+    handleFullscreen();
   }
 };
 const handlePause = (e) => (playBtn.innerText = "Play");
@@ -81,17 +91,6 @@ const handleTimelineChange = (event) => {
   } = event;
 
   video.currentTime = value;
-};
-
-const handleFullscreen = () => {
-  const fullscreen = document.fullscreenElement;
-  if (fullscreen) {
-    document.exitFullscreen();
-    fullScreenIcon.classList = "fas fa-expand";
-  } else {
-    videoContainer.requestFullscreen();
-    fullScreenIcon.classList = "fas fa-compress";
-  }
 };
 
 const hideControls = () => videoControls.classList.remove("showing");
