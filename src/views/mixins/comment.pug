@@ -1,0 +1,6 @@
+mixin comment(comment)
+    ul
+        each comment in video.comments.reverse()
+            li.video__comment
+                i.fas.fa-comment
+                |  #{comment.text}
