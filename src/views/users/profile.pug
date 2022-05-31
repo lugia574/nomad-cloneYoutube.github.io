@@ -5,13 +5,14 @@ include ../mixins/video
 block content
     div.profile__data
         if user.avatarUrl
-            if user.avatarUrl.includes("uploads") 
+            if user.avatarUrl.includes("uploads")
                 img(src="/"+user.avatarUrl).avatar
             else
-                img(src="/"+user.avatarUrl).avatar
+                img(src=user.avatarUrl).avatar
         else 
             img(src="https://i.pinimg.com/564x/1b/b6/9c/1bb69cc0f36b91756d1709e9330a2e1f.jpg").avatar
         h3=user.name
+        
     div.video-grid
         each video in user.videos 
             +video(video)

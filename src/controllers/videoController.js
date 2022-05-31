@@ -16,11 +16,13 @@ export const home = async (req, res) => {
 };
 export const watch = async (req, res) => {
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
 
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
+
+  console.log(video);
   return res.render("watch", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
@@ -46,7 +48,14 @@ export const postEdit = async (req, res) => {
   } = req.session;
   const { id } = req.params;
   const { title, description, hashtags } = req.body;
-  const video = await Video.exists({ _id: id });
+  const video = await Video.findById(id);
+
+  // 니코쌤 코드 그대로 쓰면
+  // postEdit에서 video.owner이 undefinded가 나옵니다!
+  // 이유는 video를 가져올때 Video.exists로 가져오는데
+  // exists메소드는 boolean을 리턴하기때문에 video.owner이
+  // undefinded로 나오는 거예요!
+
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
@@ -107,6 +116,8 @@ export const deleteVideo = async (req, res) => {
     return res.status(403).redirect("/");
   }
   await Video.findOneAndDelete(id);
+  user.videos.splice(user.videos.indexOf(id), 1);
+  user.save();
 
   return res.redirect("/");
 };
@@ -153,6 +164,11 @@ export const createComment = async (req, res) => {
     video: id,
   });
 
-  video.comment.push(comment._id);
+  video.comments.push(comment._id);
+  video.save();
+
+  user.comments.push(comment._id);
+  user.save();
+
   return res.sendStatus(200);
 };

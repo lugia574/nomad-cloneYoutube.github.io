@@ -15,8 +15,11 @@ header
                     a(href="/users/logout")  Log Out
                 li
                     a(href=`/users/${loggedInUser._id}`) 
-                        if (loggedInUser.avatarUrl)     
-                            img.header__avatar(src=loggedInUser.avatarUrl,crossorigin)              
+                        if (loggedInUser.avatarUrl)
+                            if loggedInUser.avatarUrl.includes("uploads")     
+                                img.header__avatar(src="/"+loggedInUser.avatarUrl,crossorigin)
+                            else  
+                                img.header__avatar(src=loggedInUser.avatarUrl,crossorigin)            
                         else 
                             img(src="https://i.pinimg.com/564x/1b/b6/9c/1bb69cc0f36b91756d1709e9330a2e1f.jpg").header__avatar
             else
