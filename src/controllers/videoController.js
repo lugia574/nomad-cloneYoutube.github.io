@@ -164,11 +164,13 @@ export const createComment = async (req, res) => {
     video: id,
   });
 
+  const comment_user = await User.findById(user._id);
+
   video.comments.push(comment._id);
   video.save();
 
-  user.comments.push(comment._id);
-  user.save();
+  comment_user.comments.push(comment._id);
+  comment_user.save();
 
   return res.sendStatus(200);
 };
