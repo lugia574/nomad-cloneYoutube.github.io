@@ -1,6 +1,7 @@
 mixin comment(comment)
     ul
         each comment in video.comments.reverse()
-            li.video__comment
+            li.video__comment(data-id=comment.id)
                 i.fas.fa-comment
                 span  #{comment.text}
+                span  X
