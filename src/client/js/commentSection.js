@@ -1,21 +1,27 @@
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
+const comment = document.getElementById("video__comments");
+const videoComments = document.querySelector(".video__comments ul");
 
 const addComment = (text, id) => {
-  const videoComments = document.querySelector(".video__comments ul");
   const newComment = document.createElement("li");
   newComment.className = "video__comment";
   newComment.dataset.id = id;
+  newComment.id = "video__comment";
   const icon = document.createElement("i");
   icon.className = "fas fa-comment";
   const span = document.createElement("span");
   span.innerText = ` ${text}`;
-  const span2 = document.createElement("span");
-  span2.innerText = "X";
-  newComment.appendChild(icon);
+  const button = document.createElement("button");
+  button.innerText = "✖";
+  button.id = newComment.appendChild(icon);
   newComment.appendChild(span);
-  newComment.appendChild(span2);
+  newComment.appendChild(button);
   videoComments.prepend(newComment);
+};
+
+const delComment = (element) => {
+  element.remove();
 };
 
 const handleSubmit = async (event) => {
@@ -35,7 +41,7 @@ const handleSubmit = async (event) => {
     body: JSON.stringify({ text }),
   });
 
-  console.log(response.status);
+  //console.log(response.status);
 
   if (response.status === 201) {
     textarea.value = "";
@@ -44,6 +50,26 @@ const handleSubmit = async (event) => {
   }
 };
 
+const handleDelComment = async (event) => {
+  const commentID = event.target.parentElement.dataset.id;
+  const videoId = videoContainer.dataset.id;
+
+  const response = await fetch(`/api/comment/${commentID}/delete`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ videoId }),
+  });
+
+  if (response.status === 201) {
+    // 이제 fakeComment 지워주자
+    delComment(event.target.parentElement);
+  }
+};
+
 if (form) {
   form.addEventListener("submit", handleSubmit);
 }
+
+videoComments.addEventListener("click", handleDelComment);

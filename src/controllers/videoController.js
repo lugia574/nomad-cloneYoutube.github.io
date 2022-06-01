@@ -22,7 +22,7 @@ export const watch = async (req, res) => {
     return res.render("404", { pageTitle: "Video not found." });
   }
 
-  console.log(video);
+  //console.log(video);
   return res.render("watch", { pageTitle: video.title, video });
 };
 export const getEdit = async (req, res) => {
@@ -119,7 +119,7 @@ export const deleteVideo = async (req, res) => {
   if (String(video.owner) !== String(_id)) {
     return res.status(403).redirect("/");
   }
-  await Video.findOneAndDelete(id);
+  await Video.deleteOne({ _id: id });
 
   user.videos.splice(user.videos.indexOf(id), 1);
   user.save();
@@ -178,4 +178,34 @@ export const createComment = async (req, res) => {
   comment_user.save();
 
   return res.status(201).json({ newCommentId: comment._id });
+};
+
+export const commentDelete = async (req, res) => {
+  const {
+    session: { user },
+    body: { videoId },
+    params: { commentId },
+  } = req;
+
+  const comment = await Comment.findById(commentId).populate("owner");
+  const commentOwner = await User.findById(comment.owner.id).populate(
+    "comments"
+  );
+
+  if (user._id != comment.owner.id) {
+    return res.sendStatus(403);
+  }
+  // console.log("맞지롱");
+  // console.log(commentId);
+
+  const commentDel = await Comment.deleteOne({ _id: commentId });
+  // console.log(commentDel);
+
+  // 유저 댓글 부분도 지워주자
+  commentOwner.comments.splice(commentOwner.comments.indexOf(commentId), 1);
+  commentOwner.save();
+
+  //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+
+  return res.sendStatus(201);
 };

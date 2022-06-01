@@ -1,7 +1,8 @@
 mixin comment(comment)
     ul
         each comment in video.comments.reverse()
-            li.video__comment(data-id=comment.id)
+            li.video__comment(data-id=comment.id)#video__comment
                 i.fas.fa-comment
                 span  #{comment.text}
-                span  X
+                if String(comment.owner) === String(loggedInUser._id)
+                    button  ✖
