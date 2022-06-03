@@ -2,6 +2,55 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+
+  .video__meta_data {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2.5rem;
+
+    .video__title {
+      font-size: 2.5rem;
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+
+    .videos__description {
+      display: block;
+      margin-top: 2.5rem;
+    }
+  }
+  .owner__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    .owner__data {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+
+      .owner__avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+      }
+      .video__owner {
+        display: block;
+        margin-top: 0.5rem;
+        a {
+          text-decoration: none;
+          color: inherit;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+
+  .pload__data {
+    display: flex;
+    flex-direction: column;
+  }
   .video__title {
     font-size: 26px;
     margin-bottom: 5px;

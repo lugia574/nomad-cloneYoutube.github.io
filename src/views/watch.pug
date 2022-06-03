@@ -22,21 +22,29 @@ block content
                 span#fullScreen
                     i.fas.fa-expand
     div.video__data
-        p.video__title=video.title
-        small.video__owner Uploaded by 
-            a(href=`/users/${video.owner._id}`)=video.owner.name
-        small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-        if String(video.owner._id) === String(loggedInUser._id)
-            a(href=`${video.id}/edit`) Edit Video &rarr;
-            br
-            a(href=`${video.id}/delete`) Delete Video &rarr;
+        div.video__meta_data
+            p.video__title=video.title
+            span 조회수 #{video.meta.views} 회
+            small.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
+            span.videos__description #{video.description}
+        div.owner__meta
+            div.owner__data
+                img.owner__avatar(src="/"+video.owner.avatarUrl ,crossorigin)
+                small.video__owner 
+                    a(href=`/users/${video.owner._id}`)=video.owner.name
+            div.upload__data
+                if String(video.owner._id) === String(loggedInUser._id)
+                    a(href=`${video.id}/edit`) Edit Video &rarr;
+                    br
+                    a(href=`${video.id}/delete`) Delete Video &rarr;
     if loggedIn
         div.video__add-comments
                 form.video__comment-form#commentForm
                     textarea(cols="30", rows="10", placeholder="Write a nice commment...")#textarea
                     button Add Comment
+
         div.video__comments
-            +comment(comment)
+            +comment(video, commments)
 
 block script 
     script(src="/static/js/videoPlayer.js") 

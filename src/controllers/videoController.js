@@ -17,13 +17,17 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
+  console.log("🤬🤬🤬뭐냐??🤬🤬🤬", +video);
+  console.log("🤬🤬🤬뭐하냐?🤬🤬🤬", +video._id);
 
+  const comments = await Comment.find({ video: id }).populate("owner");
+  console.log("🤬🤬뭐하냐구????🤬🤬", +comments);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
 
   //console.log(video);
-  return res.render("watch", { pageTitle: video.title, video });
+  return res.render("watch", { pageTitle: video.title, video, comments });
 };
 export const getEdit = async (req, res) => {
   const { id } = req.params;
