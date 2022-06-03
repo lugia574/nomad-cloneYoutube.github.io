@@ -9,9 +9,9 @@ const s3 = new aws.S3({
   },
 });
 
-const isHeroku = process.env.NODE_ENV === "prodection";
+const isHeroku = process.env.NODE_ENV === "production";
 
-console.log("😡😡😡😡😡😡 있냐고 색햐", isHeroku);
+console.log("😡😡😡 있냐고 색히야 😡😡😡", isHeroku);
 
 const s3ImageUploader = multerS3({
   s3: s3,
