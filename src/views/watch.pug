@@ -29,7 +29,7 @@ block content
             span.videos__description #{video.description}
         div.owner__meta
             div.owner__data
-                img.owner__avatar(src="/"+video.owner.avatarUrl ,crossorigin)
+                img.owner__avatar(src=video.owner.avatarUrl ,crossorigin)
                 small.video__owner 
                     a(href=`/users/${video.owner._id}`)=video.owner.name
             div.upload__data

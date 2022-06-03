@@ -17,24 +17,24 @@ export const home = async (req, res) => {
 export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
-  console.log("🤬🤬🤬뭐냐??🤬🤬🤬", +video);
-  console.log("🤬🤬🤬뭐하냐?🤬🤬🤬", +video._id);
 
-  const comments = await Comment.find({ video: id }).populate("owner");
-  console.log("🤬🤬뭐하냐구????🤬🤬", +comments);
   if (!video) {
     return res.render("404", { pageTitle: "Video not found." });
   }
 
   //console.log(video);
-  return res.render("watch", { pageTitle: video.title, video, comments });
+  return res.render("watch", { pageTitle: video.title, video });
 };
+
 export const getEdit = async (req, res) => {
   const { id } = req.params;
   const {
     user: { _id },
   } = req.session;
   const video = await Video.findById(id);
+
+  const comments = await Comment.find({ video: id }).populate("owner");
+
   if (!video) {
     return res.status(404).render("404", { pageTitle: "Video not found." });
   }
@@ -43,7 +43,11 @@ export const getEdit = async (req, res) => {
     return res.status(403).redirect("/");
   }
 
-  return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
+  return res.render("edit", {
+    pageTitle: `Edit ${video.title}`,
+    video,
+    comments,
+  });
 };
 
 export const postEdit = async (req, res) => {
@@ -188,7 +192,7 @@ export const createComment = async (req, res) => {
 export const commentDelete = async (req, res) => {
   const {
     session: { user },
-    body: { videoId },
+    // body: { videoId },
     params: { commentId },
   } = req;
 
@@ -200,10 +204,8 @@ export const commentDelete = async (req, res) => {
   if (user._id != comment.owner.id) {
     return res.sendStatus(403);
   }
-  // console.log("맞지롱");
-  // console.log(commentId);
 
-  const commentDel = await Comment.deleteOne({ _id: commentId });
+  await Comment.deleteOne({ _id: commentId });
   // console.log(commentDel);
 
   // 유저 댓글 부분도 지워주자
