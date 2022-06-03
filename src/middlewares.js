@@ -11,6 +11,8 @@ const s3 = new aws.S3({
 
 const isHeroku = process.env.NODE_ENV === "prodection";
 
+console.log("😡😡😡😡😡😡 있냐고 색햐", isHeroku);
+
 const s3ImageUploader = multerS3({
   s3: s3,
   bucket: "lugia-wetube/images",
