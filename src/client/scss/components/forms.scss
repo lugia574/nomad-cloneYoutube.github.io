@@ -15,19 +15,22 @@ input[type="submit"] {
   background-color: black;
   margin-bottom: 5px;
   font-size: 16px;
-  color: white;
+  color: gray;
   width: 90%;
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
+}
+#file-upload-button {
+  background-color: gray;
 }
 
 input[type="submit"],
 .social__btn {
   border-radius: 5px;
   padding: 12px 20px;
-  background-color: white !important;
-  color: rgba($color: $red, $alpha: 1) !important;
+  background-color: gray !important;
+  color: rgba($color: #ffffff, $alpha: 1) !important;
   text-align: center !important;
   cursor: pointer;
   display: block;

@@ -27,8 +27,8 @@ const delComment = (element) => {
 const handleSubmit = async (event) => {
   event.preventDefault();
 
-  const textarea = form.querySelector("textarea");
-  const text = textarea.value;
+  const input = form.querySelector("input");
+  const text = input.value;
   const videoId = videoContainer.dataset.id;
   if (text === "") {
     return;
