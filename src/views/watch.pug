@@ -41,10 +41,9 @@ block content
         div.video__add-comments
                 form.video__comment-form#commentForm
                     input(type="text")( placeholder="Write a nice commment...")#textarea.
-                   
 
-        div.video__comments
-            +comment(video, commments)
+    div.video__comments
+        +comment(video, commments)
 
 block script 
     script(src="/static/js/videoPlayer.js") 
