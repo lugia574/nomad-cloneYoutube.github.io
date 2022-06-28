@@ -5,4 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .video_owner__avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
 }
