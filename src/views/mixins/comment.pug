@@ -4,7 +4,6 @@ mixin comment(video)
             li.video__comment(data-id=comment.id)#video__comment
                 div
                     i.fas.fa-user
-                    span  #{comment.owner}
                     span  #{comment.text}
                 if String(comment.owner) === String(loggedInUser._id)
                     button  ✖
