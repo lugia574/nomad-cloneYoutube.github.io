@@ -14,8 +14,8 @@ block content
         h3=user.name
 
     div.video-grid
-        each video in videos 
-            +video(video)
+        if user.videos 
+            +profile_video(user)
         else 
             span.empty__message No videos found
 
