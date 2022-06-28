@@ -18,11 +18,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
 
     .video_info {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       .video_owner__avatar {
         width: 40px;
