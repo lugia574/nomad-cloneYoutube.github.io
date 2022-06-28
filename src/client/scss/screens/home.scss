@@ -6,9 +6,15 @@
   justify-content: center;
   align-items: center;
 
-  .video_owner__avatar {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+  .video_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .video_owner__avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
   }
 }

@@ -4,7 +4,7 @@ mixin video(video)
             img.thumb(src=video.thumbUrl, crossorigin)
 
         div.video-mixin__data
-            div.video_owner.avatar
+            div.video_info
                 img.video_owner__avatar(src=video.owner.avatarUrl, crossorigin)
             div.video_info
                 span.video-mixin__title=video.title 
