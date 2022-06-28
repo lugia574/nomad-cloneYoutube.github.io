@@ -30,9 +30,10 @@
       justify-content: flex-start;
       align-items: flex-start;
       a {
+        display: block;
+        width: 40px;
+        height: 40px;
         .video_owner__avatar {
-          width: 40px;
-          height: 40px;
           border-radius: 50%;
           cursor: pointer;
           margin: 5px 0 0 10px;
