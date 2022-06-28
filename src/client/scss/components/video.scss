@@ -33,10 +33,10 @@
         display: block;
         width: 40px;
         height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        margin: 5px 0 0 10px;
         .video_owner__avatar {
-          border-radius: 50%;
-          cursor: pointer;
-          margin: 5px 0 0 10px;
         }
       }
       .video-mixin__title {
