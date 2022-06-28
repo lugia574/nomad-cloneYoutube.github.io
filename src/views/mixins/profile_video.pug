@@ -1,15 +1,14 @@
-mixin profile_video()
-    span haha
-    //- each video in user.videos
-    //-     a(href=`/videos/${video.id}`).video-mixin
-    //-         div.video-mixin__thumb
-    //-             img.thumb(src=video.thumbUrl, crossorigin)
+mixin profile_video(user)
+    each video in user.videos
+        a(href=`/videos/${video.id}`).video-mixin
+            div.video-mixin__thumb
+                img.thumb(src=video.thumbUrl, crossorigin)
 
-    //-         div.video-mixin__data
-    //-             div.video_info
-    //-                 img.video_owner__avatar(src=user.avatarUrl, crossorigin)
-    //-             div.video_info
-    //-                 span.video-mixin__title=video.title 
-    //-                 div.video-mixin__meta
-    //-                     span #{video.owner.name} •
-    //-                     span #{video.meta.views}회
+            div.video-mixin__data
+                div.video_info
+                    img.video_owner__avatar(src=user.avatarUrl, crossorigin)
+                div.video_info
+                    span.video-mixin__title=video.title 
+                    div.video-mixin__meta
+                        span #{video.owner.name} •
+                        span #{video.meta.views}회
