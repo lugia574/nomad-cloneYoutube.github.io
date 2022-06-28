@@ -145,7 +145,7 @@ export const search = async (req, res) => {
       title: {
         //keyword를 contain하고 대소문자 구분없이 찾게됨. (mongoDB의 기능)
         //{ $regex: new RegExp(`${keyword}$`, "i") },
-        $regex: new RegExp({ keyword }, "i"),
+        $regex: new RegExp(`${keyword}$`, "i"),
       },
     }).populate("owner");
   }
