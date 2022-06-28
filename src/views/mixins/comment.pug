@@ -1,10 +1,10 @@
-mixin comment(video, comments)
+mixin comment(video)
     ul
-        span=comments
         each comment in video.comments.reverse()
             li.video__comment(data-id=comment.id)#video__comment
                 div
                     i.fas.fa-user
+                    span  #{comment.owner}
                     span  #{comment.text}
                 if String(comment.owner) === String(loggedInUser._id)
                     button  ✖
