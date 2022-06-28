@@ -142,7 +142,8 @@ export const search = async (req, res) => {
   let videos = [];
   if (keyword) {
     videos = await Video.find({
-      title: { $regex: new RegExp(`${keyword}$`, "i") },
+      title: { $regex: `/${keyword}/` },
+      //{ $regex: new RegExp(`${keyword}$`, "i") },
     }).populate("owner");
   }
 
