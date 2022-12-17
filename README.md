@@ -2,6 +2,8 @@
 
 https://opentutorials.org/module/3549
 
+https://www.youtube.com/playlist?list=PLfLgtT94nNq1qmsvIii_CAxFlD7tvB5NE
+
 # express
 
 https://opentutorials.org/module/3590
@@ -25,6 +27,10 @@ nodejs의 순수 기능만으로는 너무 불편하고 세련되지 못하다�
     각 기능을 보유한 라이브러리들을 한데 묶어 담은 것이 바로 프레임워크
 
 그중 express 를 알아보도록하자
+
+근데 express 본인은 자신들을 라이브러리라고 소개함
+
+ㅋㅋ
 
 # Wetube Reloaded
 
