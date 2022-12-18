@@ -34,6 +34,10 @@ nodejs의 순수 기능만으로는 너무 불편하고 세련되지 못하다�
 
 # Wetube Reloaded
 
+참고자료 :
+
+- https://backend-intro.vlpt.us/1/03.html
+
 / -> Home
 
 /join -> Join
